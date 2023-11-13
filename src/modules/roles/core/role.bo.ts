@@ -1,7 +1,7 @@
 export class RoleBO {
   readonly roleId: number;
 
-  readonly name: string;
+  readonly roleCode: string;
 
   readonly description: string;
 

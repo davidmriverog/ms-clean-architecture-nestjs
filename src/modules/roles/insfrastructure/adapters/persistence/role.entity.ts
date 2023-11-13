@@ -24,7 +24,7 @@ export class RoleEntity {
   deletedAt: Date;
 
   @Column({ type: 'varchar', length: 125 })
-  name: string;
+  description: string;
 
   @Column({ type: 'varchar', length: 125 })
   roleCode: string;

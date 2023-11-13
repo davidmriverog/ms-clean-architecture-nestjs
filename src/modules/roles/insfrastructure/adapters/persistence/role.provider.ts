@@ -1,12 +1,10 @@
 import { DataSource } from 'typeorm';
 import { RoleEntity } from './role.entity';
-
-export const ROLE_REPOSITORY = 'ROLE_REPOSITORY';
-export const ROLE_ADAPTER_PORT = 'ROLE_ADAPTER_PORT';
+import { RoleProviderEnum } from '@modules/roles/core/role-provider.enum';
 
 export const RoleProvider = [
   {
-    provide: ROLE_REPOSITORY,
+    provide: RoleProviderEnum.ROLE_REPOSITORY,
     useFactory: (dataSource: DataSource) =>
       dataSource.getRepository(RoleEntity),
     inject: [DataSource],

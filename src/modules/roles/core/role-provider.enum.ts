@@ -1,0 +1,4 @@
+export enum RoleProviderEnum {
+  ROLE_REPOSITORY = 'ROLE_REPOSITORY',
+  ROLE_ADAPTER_PORT = 'ROLE_ADAPTER_PORT',
+}

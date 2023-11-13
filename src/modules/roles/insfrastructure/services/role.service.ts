@@ -1,11 +1,11 @@
-import { RoleFindAllUseCase } from '@modules/roles/application/use-case/role-find-all.uc';
+import { RoleGetAllUseCase } from '@modules/roles/application/use-case/role-getAll.uc';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RoleService {
-  constructor(private readonly getAllRoleUseCase: RoleFindAllUseCase) {}
+  constructor(private readonly roleGetAllUseCase: RoleGetAllUseCase) {}
 
   async getAll() {
-    return await this.getAllRoleUseCase.execute();
+    return await this.roleGetAllUseCase.execute();
   }
 }
