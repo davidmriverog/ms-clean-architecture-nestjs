@@ -1,4 +1,4 @@
 import { BasePort } from '@shared/application/ports/port-base.port';
-import { RoleEntity } from '@modules/roles/insfrastructure/adapters/persistence/role.entity';
+import { RoleBO } from '@modules/roles/core/role.bo';
 
-export interface RolePort extends BasePort<RoleEntity> {}
+export interface RolePort extends BasePort<RoleBO> {}
