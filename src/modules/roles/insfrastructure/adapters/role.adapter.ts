@@ -2,10 +2,10 @@ import { Inject } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource, QueryRunner, Repository } from 'typeorm';
 
-import { RoleBO } from '@modules/roles/domainrole.bo';
+import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleEntity } from './persistence/role.entity';
 import { RolePort } from '@modules/roles/application/ports/role.port';
-import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
+import { RoleProviderEnum } from '@modules/roles/domain//enums/role-provider.enum';
 import { RoleMapper } from '../mappers/role.mapper';
 
 export class RoleAdapterPort extends RolePort {

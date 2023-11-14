@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
-import { RoleBO } from '@modules/roles/domainrole.bo';
-import { RoleDto } from '@modules/roles/domaindto/role.dto';
+import { RoleBO } from '@modules/roles/domain/role.bo';
+import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 import { RoleEntity } from '../adapters/persistence/role.entity';
 
 @Injectable()

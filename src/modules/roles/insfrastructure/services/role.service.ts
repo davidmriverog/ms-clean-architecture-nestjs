@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RoleUseCaseEnum } from '@modules/roles/domain/enums/role-usecase.enum';
-import { IRoleGetAllUseCase } from '@modules/roles/domainuse-cases/role-getAll.interface';
-import { IRoleNewUseCase } from '@modules/roles/domainuse-cases/role-new.interface';
+import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
+import { IRoleGetAllUseCase } from '@modules/roles/domain/use-cases/role-getAll.interface';
+import { IRoleNewUseCase } from '@modules/roles/domain/use-cases/role-new.interface';
 
 @Injectable()
 export class RoleService {
