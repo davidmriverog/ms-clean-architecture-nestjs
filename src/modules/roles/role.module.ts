@@ -1,41 +1,49 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@databases/database.module';
+import { DatabaseModule } from '@infra/database';
+
 import { RoleController } from './insfrastructure/controllers/role.controller';
 import { RoleProvider } from './insfrastructure/adapters/persistence/role.provider';
 import { RoleAdapterPort } from './insfrastructure/adapters/role.adapter';
 import { RoleMapper } from './insfrastructure/mappers/role.mapper';
 import { RoleService } from './insfrastructure/services/role.service';
-import { RoleProviderEnum } from './core/enums/role-provider.enum';
+import { RoleProviderEnum } from './domain/enums/role-provider.enum';
+import { RoleUseCaseEnum } from './domain/enums/role-usecase.enum';
+
 import { RoleGetAllUseCase } from './application/use-case/role-getAll.uc';
-import { RoleUseCaseEnum } from './core/enums/role-usecase.enum';
+import { RoleNewUseCase } from './application/use-case/role-new.uc';
+
+const ROLE_USE_CASES = [
+  {
+    provide: RoleUseCaseEnum.ROLE_GET_ALL,
+    useClass: RoleGetAllUseCase,
+  },
+  {
+    provide: RoleUseCaseEnum.ROLE_NEW,
+    useClass: RoleNewUseCase,
+  },
+];
 
 @Module({
   imports: [DatabaseModule],
   controllers: [RoleController],
   providers: [
     ...RoleProvider,
+    ...ROLE_USE_CASES,
     {
       provide: RoleProviderEnum.ROLE_ADAPTER_PORT,
       useClass: RoleAdapterPort,
     },
     RoleMapper,
-    {
-      provide: RoleUseCaseEnum.ROLE_GET_ALL,
-      useClass: RoleGetAllUseCase,
-    },
     RoleService,
   ],
   exports: [
     ...RoleProvider,
+    ...ROLE_USE_CASES,
     {
       provide: RoleProviderEnum.ROLE_ADAPTER_PORT,
       useClass: RoleAdapterPort,
     },
     RoleMapper,
-    {
-      provide: RoleUseCaseEnum.ROLE_GET_ALL,
-      useClass: RoleGetAllUseCase,
-    },
     RoleService,
   ],
 })
