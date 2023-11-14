@@ -5,7 +5,7 @@ import { DataSource, Repository } from 'typeorm';
 import { RoleBO } from '@modules/roles/core/role.bo';
 import { RoleEntity } from './persistence/role.entity';
 import { RolePort } from '@modules/roles/application/ports/role.port';
-import { RoleProviderEnum } from '@modules/roles/core/role-provider.enum';
+import { RoleProviderEnum } from '@modules/roles/core/enums/role-provider.enum';
 import { RoleMapper } from '../mappers/role.mapper';
 
 export class RoleAdapterPort implements RolePort {

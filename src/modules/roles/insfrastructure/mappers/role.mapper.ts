@@ -7,8 +7,8 @@ import { RoleEntity } from '../adapters/persistence/role.entity';
 @Injectable()
 export class RoleMapper {
   transform(roleEntity: RoleEntity): RoleBO {
-    const convert = plainToInstance(RoleBO, roleEntity);
-
-    return convert;
+    return plainToInstance(RoleBO, {
+      ...roleEntity,
+    });
   }
 }

@@ -5,8 +5,9 @@ import { RoleProvider } from './insfrastructure/adapters/persistence/role.provid
 import { RoleAdapterPort } from './insfrastructure/adapters/role.adapter';
 import { RoleMapper } from './insfrastructure/mappers/role.mapper';
 import { RoleService } from './insfrastructure/services/role.service';
-import { RoleProviderEnum } from './core/role-provider.enum';
+import { RoleProviderEnum } from './core/enums/role-provider.enum';
 import { RoleGetAllUseCase } from './application/use-case/role-getAll.uc';
+import { RoleUseCaseEnum } from './core/enums/role-usecase.enum';
 
 @Module({
   imports: [DatabaseModule],
@@ -18,7 +19,10 @@ import { RoleGetAllUseCase } from './application/use-case/role-getAll.uc';
       useClass: RoleAdapterPort,
     },
     RoleMapper,
-    RoleGetAllUseCase,
+    {
+      provide: RoleUseCaseEnum.ROLE_GET_ALL,
+      useClass: RoleGetAllUseCase,
+    },
     RoleService,
   ],
   exports: [
@@ -28,7 +32,10 @@ import { RoleGetAllUseCase } from './application/use-case/role-getAll.uc';
       useClass: RoleAdapterPort,
     },
     RoleMapper,
-    RoleGetAllUseCase,
+    {
+      provide: RoleUseCaseEnum.ROLE_GET_ALL,
+      useClass: RoleGetAllUseCase,
+    },
     RoleService,
   ],
 })
