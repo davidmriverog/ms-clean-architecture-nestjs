@@ -7,6 +7,8 @@ import { RoleEntity } from './persistence/role.entity';
 import { RolePort } from '@modules/roles/application/ports/role.port';
 import { RoleProviderEnum } from '@modules/roles/domain//enums/role-provider.enum';
 import { RoleMapper } from '../mappers/role.mapper';
+import { Result } from '@shared/infrastructure/Result';
+import { UpdatedResult } from '@shared/application/ports/port-base.port';
 
 export class RoleAdapterPort extends RolePort {
   constructor(
@@ -29,19 +31,19 @@ export class RoleAdapterPort extends RolePort {
     return mappers;
   }
 
-  async create(attrs: any, queryRunner?: QueryRunner): Promise<RoleBO> {
+  async create(attrs: any, queryRunner?: QueryRunner): Promise<Result<RoleBO>> {
     const entity = this.roleMapper.transformDtoToEntity(attrs);
 
     const result = await queryRunner.manager.save(entity);
 
-    return this.roleMapper.transform(result);
+    return Result.success(this.roleMapper.transform(result));
   }
 
   async update(
     id: number,
     attrs: any,
     queryRunner?: QueryRunner,
-  ): Promise<boolean> {
+  ): Promise<Result<UpdatedResult>> {
     const entity = this.roleMapper.transformDtoToEntity(attrs);
 
     const result = await queryRunner.manager.update(
@@ -52,10 +54,18 @@ export class RoleAdapterPort extends RolePort {
       entity,
     );
 
-    return result.affected > 0 ? true : false;
+    if (result.affected === 0)
+      return Result.fail('Role Is not Exists for edit.');
+
+    return Result.success({
+      affected: result.affected > 0 ? true : false,
+    });
   }
 
-  async remove(id: number, queryRunner?: QueryRunner): Promise<boolean> {
+  async remove(
+    id: number,
+    queryRunner?: QueryRunner,
+  ): Promise<Result<UpdatedResult>> {
     const result = await queryRunner.manager
       .createQueryBuilder()
       .softDelete()
@@ -63,6 +73,8 @@ export class RoleAdapterPort extends RolePort {
       .where(`${RoleEntity.getIdPropertyName()} = :id`, { id: id })
       .execute();
 
-    return result.affected > 0 ? true : false;
+    return Result.success({
+      affected: result.affected > 0 ? true : false,
+    });
   }
 }

@@ -13,10 +13,13 @@ import {
 import { Response } from 'express';
 import { RoleService } from '../services/role.service';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
+import { HttpResponse } from '@shared/infrastructure/http/http-response';
 
 @Controller('roles')
-export class RoleController {
-  constructor(private readonly roleService: RoleService) {}
+export class RoleController extends HttpResponse {
+  constructor(private readonly roleService: RoleService) {
+    super();
+  }
 
   @Get()
   async findAll(@Res() res: Response) {
@@ -32,7 +35,7 @@ export class RoleController {
   ) {
     const result = await this.roleService.create(body);
 
-    return res.status(HttpStatus.OK).json(result);
+    return this.response(res, result);
   }
 
   @Put('/:id')
@@ -43,13 +46,13 @@ export class RoleController {
   ) {
     const result = await this.roleService.update(id, body);
 
-    return res.status(HttpStatus.OK).json(result);
+    return this.response(res, result);
   }
 
   @Delete('/:id')
   async remove(@Param('id') id: number, @Res() res: Response) {
     const result = await this.roleService.remove(id);
 
-    return res.status(HttpStatus.OK).json(result);
+    return this.response(res, result);
   }
 }

@@ -1,4 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Result } from '@shared/infrastructure/Result';
+
 import { RolePort } from '../ports/role.port';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
@@ -13,13 +15,15 @@ export class RoleNewUseCase implements IRoleNewUseCase {
     private readonly rolePort: RolePort,
   ) {}
 
-  async execute(attrs: RoleDto): Promise<RoleBO> {
-    const result: RoleBO = await this.rolePort.transaction(
+  async execute(attrs: RoleDto): Promise<Result<RoleBO | string>> {
+    const result = await this.rolePort.transaction<RoleBO>(
       async (transaction) => {
         return await this.rolePort.create(attrs, transaction);
       },
     );
 
-    return result;
+    if (result.isFaliure) return Result.fail<string>(result.error);
+
+    return Result.success<RoleBO>(result.value as RoleBO);
   }
 }

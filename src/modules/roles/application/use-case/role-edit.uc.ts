@@ -3,6 +3,7 @@ import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 import { IRoleEditUseCase } from '@modules/roles/domain/use-cases/role-edit.interface';
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 import { RolePort } from '../ports/role.port';
+import { Result } from '@shared/infrastructure/Result';
 
 @Injectable()
 export class RoleEditUseCase implements IRoleEditUseCase {
@@ -11,11 +12,13 @@ export class RoleEditUseCase implements IRoleEditUseCase {
     private readonly rolePort: RolePort,
   ) {}
 
-  async execute(id: number, attrs: RoleDto): Promise<boolean> {
-    const result: boolean = await this.rolePort.transaction(async (tr) => {
+  async execute(id: number, attrs: RoleDto): Promise<Result<string | boolean>> {
+    const result = await this.rolePort.transaction(async (tr) => {
       return await this.rolePort.update(id, attrs, tr);
     });
 
-    return result;
+    if (result.isFaliure) return Result.fail<string>(result.error);
+
+    return Result.success<boolean>(result.value as boolean);
   }
 }
