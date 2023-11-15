@@ -36,4 +36,33 @@ export class RoleAdapterPort extends RolePort {
 
     return this.roleMapper.transform(result);
   }
+
+  async update(
+    id: number,
+    attrs: any,
+    queryRunner?: QueryRunner,
+  ): Promise<boolean> {
+    const entity = this.roleMapper.transformDtoToEntity(attrs);
+
+    const result = await queryRunner.manager.update(
+      RoleEntity,
+      {
+        [RoleEntity.getIdPropertyName()]: id,
+      },
+      entity,
+    );
+
+    return result.affected > 0 ? true : false;
+  }
+
+  async remove(id: number, queryRunner?: QueryRunner): Promise<boolean> {
+    const result = await queryRunner.manager
+      .createQueryBuilder()
+      .softDelete()
+      .from(RoleEntity)
+      .where(`${RoleEntity.getIdPropertyName()} = :id`, { id: id })
+      .execute();
+
+    return result.affected > 0 ? true : false;
+  }
 }

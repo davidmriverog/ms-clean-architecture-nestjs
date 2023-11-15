@@ -7,11 +7,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { BaseEntity } from '@infra/common/base.entity';
+import { ModelIdentity } from '@infra/decorators/identity/identity.decorator';
+
 @Entity({
   name: 'roles',
 })
-export class RoleEntity {
+export class RoleEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
+  @ModelIdentity()
   roleId: number;
 
   @CreateDateColumn({ type: 'timestamp without time zone' })

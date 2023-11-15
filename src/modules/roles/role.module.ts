@@ -11,6 +11,8 @@ import { RoleUseCaseEnum } from './domain/enums/role-usecase.enum';
 
 import { RoleGetAllUseCase } from './application/use-case/role-getAll.uc';
 import { RoleNewUseCase } from './application/use-case/role-new.uc';
+import { RoleEditUseCase } from './application/use-case/role-edit.uc';
+import { RoleRemoveUseCase } from './application/use-case/role-remove.uc';
 
 const ROLE_USE_CASES = [
   {
@@ -20,6 +22,14 @@ const ROLE_USE_CASES = [
   {
     provide: RoleUseCaseEnum.ROLE_NEW,
     useClass: RoleNewUseCase,
+  },
+  {
+    provide: RoleUseCaseEnum.ROLE_EDIT,
+    useClass: RoleEditUseCase,
+  },
+  {
+    provide: RoleUseCaseEnum.ROLE_REMOVE,
+    useClass: RoleRemoveUseCase,
   },
 ];
 

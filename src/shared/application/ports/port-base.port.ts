@@ -11,6 +11,14 @@ export abstract class BasePort<I> {
 
   abstract create(attrs, queryRunner?: QueryRunner): Promise<I>;
 
+  abstract update(
+    id: number,
+    attrs,
+    queryRunner?: QueryRunner,
+  ): Promise<boolean>;
+
+  abstract remove(id: number, queryRunner?: QueryRunner): Promise<boolean>;
+
   public async transaction<T>(
     fn: (queryRunner: QueryRunner) => Promise<T>,
     transaction?: QueryRunner,

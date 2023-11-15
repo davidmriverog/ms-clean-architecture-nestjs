@@ -1,9 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
+  Param,
   Post,
+  Put,
   Res,
   ValidationPipe,
 } from '@nestjs/common';
@@ -28,6 +31,24 @@ export class RoleController {
     @Res() res: Response,
   ) {
     const result = await this.roleService.create(body);
+
+    return res.status(HttpStatus.OK).json(result);
+  }
+
+  @Put('/:id')
+  async update(
+    @Body(new ValidationPipe()) body: RoleDto,
+    @Param('id') id: number,
+    @Res() res: Response,
+  ) {
+    const result = await this.roleService.update(id, body);
+
+    return res.status(HttpStatus.OK).json(result);
+  }
+
+  @Delete('/:id')
+  async remove(@Param('id') id: number, @Res() res: Response) {
+    const result = await this.roleService.remove(id);
 
     return res.status(HttpStatus.OK).json(result);
   }
