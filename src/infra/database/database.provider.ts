@@ -19,7 +19,6 @@ export const DatabaseProvider = [
         logging: Boolean(configService.get('DB_LOGGING')),
         namingStrategy: new SnakeNamingStrategy(),
         useUTC: true,
-        poolSize: 10,
       });
 
       if (!dataSource.isInitialized) await dataSource.initialize();
