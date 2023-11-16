@@ -3,6 +3,7 @@ import { RolePort } from '../ports/role.port';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleProviderEnum } from '@modules/roles/domain//enums/role-provider.enum';
 import { IRoleGetAllUseCase } from '@modules/roles/domain/use-cases/role-getAll.interface';
+import { Result } from '@shared/infrastructure/Result';
 
 @Injectable()
 export class RoleGetAllUseCase implements IRoleGetAllUseCase {
@@ -11,7 +12,7 @@ export class RoleGetAllUseCase implements IRoleGetAllUseCase {
     private readonly rolePort: RolePort,
   ) {}
 
-  async execute(): Promise<RoleBO[]> {
+  async execute(): Promise<Result<RoleBO[]>> {
     return await this.rolePort.findAll();
   }
 }

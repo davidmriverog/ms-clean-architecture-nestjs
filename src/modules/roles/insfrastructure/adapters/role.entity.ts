@@ -13,7 +13,7 @@ import { ModelIdentity } from '@infra/decorators/identity/identity.decorator';
 @Entity({
   name: 'roles',
 })
-export class RoleEntity extends BaseEntity {
+export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   @ModelIdentity()
   roleId: number;

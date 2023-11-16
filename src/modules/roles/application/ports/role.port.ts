@@ -1,4 +1,7 @@
 import { RoleBO } from '@modules/roles/domain/role.bo';
-import { BasePort } from '@shared/application/ports/port-base.port';
+import { Role } from '@modules/roles/insfrastructure/adapters/role.entity';
+import { IBaseORMPort } from '@shared/application/ports/orm/orm.port';
 
-export abstract class RolePort extends BasePort<RoleBO> {}
+export interface RolePort extends IBaseORMPort<Role, RoleBO> {
+  // Other methods
+}

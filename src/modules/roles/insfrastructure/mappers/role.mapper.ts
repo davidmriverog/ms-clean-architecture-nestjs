@@ -3,19 +3,20 @@ import { plainToInstance } from 'class-transformer';
 
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
-import { RoleEntity } from '../adapters/persistence/role.entity';
+import { Role } from '../adapters/role.entity';
+import { IMapper } from '@shared/infrastructure/mapper/base.mapper';
 
 @Injectable()
-export class RoleMapper {
-  transform(roleEntity: RoleEntity): RoleBO {
+export class RoleMapper implements IMapper<Role, RoleBO> {
+  entityToBO(from: Role): RoleBO {
     return plainToInstance(RoleBO, {
-      ...roleEntity,
+      ...from,
     });
   }
 
-  transformDtoToEntity(dto: RoleDto): RoleEntity {
-    return plainToInstance(RoleEntity, {
-      ...dto,
+  dtoToEntity(from: RoleDto): RoleBO {
+    return plainToInstance(Role, {
+      ...from,
     });
   }
 }

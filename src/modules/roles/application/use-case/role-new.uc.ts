@@ -16,11 +16,9 @@ export class RoleNewUseCase implements IRoleNewUseCase {
   ) {}
 
   async execute(attrs: RoleDto): Promise<Result<RoleBO | string>> {
-    const result = await this.rolePort.transaction<RoleBO>(
-      async (transaction) => {
-        return await this.rolePort.create(attrs, transaction);
-      },
-    );
+    const result = await this.rolePort.transaction(async (transaction) => {
+      return await this.rolePort.create(attrs, transaction);
+    });
 
     if (result.isFaliure) return Result.fail<string>(result.error);
 

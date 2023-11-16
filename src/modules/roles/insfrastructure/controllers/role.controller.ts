@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -25,7 +24,7 @@ export class RoleController extends HttpResponse {
   async findAll(@Res() res: Response) {
     const result = await this.roleService.getAll();
 
-    return res.status(HttpStatus.OK).json(result);
+    return this.response(res, result);
   }
 
   @Post()
