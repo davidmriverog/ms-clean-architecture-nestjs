@@ -27,21 +27,29 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
     }
 
     async findAll(): Promise<Result<D[]>> {
-      const entities: I[] = await this._repository
-        .createQueryBuilder('c')
-        .getMany();
+      try {
+        const entities: I[] = await this._repository
+          .createQueryBuilder('c')
+          .getMany();
 
-      const results = entities.map(this._mapper.entityToBO);
+        const results = entities.map(this._mapper.entityToBO);
 
-      return Result.success(results);
+        return Result.success(results);
+      } catch (error) {
+        return Result.fail(error.message);
+      }
     }
 
     async create(attrs: any, queryRunner?: QueryRunner): Promise<Result<I>> {
-      const convertMapper = this._mapper.dtoToEntity(attrs);
+      try {
+        const convertMapper = this._mapper.dtoToEntity(attrs);
 
-      const result = await queryRunner.manager.save(convertMapper);
+        const result = await queryRunner.manager.save(convertMapper);
 
-      return Result.success(result);
+        return Result.success(result);
+      } catch (error) {
+        return Result.fail(error.message);
+      }
     }
 
     async update(
@@ -60,7 +68,7 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
       );
 
       if (result.affected === 0)
-        return Result.fail('Role Is not Exists for edit.');
+        throw new Error('No Data Affected, cause Role does not exists');
 
       return Result.success({
         affected: result.affected > 0 ? true : false,
@@ -77,6 +85,9 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
         .from(entity)
         .where(`${entity.getIdPropertyName()} = :id`, { id: id })
         .execute();
+
+      if (result.affected === 0)
+        throw new Error('No Data Affected, cause Role does not exists');
 
       return Result.success({
         affected: result.affected > 0 ? true : false,
@@ -101,7 +112,6 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
 
         return Result.success(this._mapper.entityToBO(result.value));
       } catch (error) {
-        console.log('error.data', error);
         if (!transaction) await queryRunner.rollbackTransaction();
 
         return Result.fail(error.message);

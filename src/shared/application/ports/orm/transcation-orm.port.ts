@@ -1,5 +1,5 @@
-import { Result } from '@shared/infrastructure/Result';
 import { QueryRunner } from 'typeorm';
+import { Result } from '@shared/infrastructure/Result';
 
 export interface ITransactionORM<I, D> {
   transaction(

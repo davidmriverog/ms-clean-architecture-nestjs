@@ -8,7 +8,7 @@ import { RoleMapper } from '../mappers/role.mapper';
 import { RolePort } from '@modules/roles/application/ports/role.port';
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
-import { AbstractBaseORMPort } from '@shared/application/ports/orm/abstract-orm.class';
+import { AbstractBaseORMPort } from '@shared/application/ports/orm/base-orm-abstract.class';
 
 export class RoleAdapterPort
   extends AbstractBaseORMPort<Role, RoleBO>(Role, RoleBO)

@@ -4,7 +4,7 @@ import { IRoleEditUseCase } from '@modules/roles/domain/use-cases/role-edit.inte
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 import { RolePort } from '../ports/role.port';
 import { Result } from '@shared/infrastructure/Result';
-import { UpdatedResult } from '@shared/application/ports/orm/base-orm.port';
+import { TransactionResult } from '@shared/application/types/transaction-result.type';
 
 @Injectable()
 export class RoleEditUseCase implements IRoleEditUseCase {
@@ -16,8 +16,8 @@ export class RoleEditUseCase implements IRoleEditUseCase {
   async execute(
     id: number,
     attrs: RoleDto,
-  ): Promise<Result<string | UpdatedResult>> {
-    const result: Result<UpdatedResult> = await this.rolePort.transaction(
+  ): Promise<Result<string | TransactionResult>> {
+    const result: Result<TransactionResult> = await this.rolePort.transaction(
       async (transaction) => {
         return await this.rolePort.update(id, attrs, transaction);
       },
