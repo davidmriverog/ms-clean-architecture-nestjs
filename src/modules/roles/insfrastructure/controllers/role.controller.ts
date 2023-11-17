@@ -27,6 +27,13 @@ export class RoleController extends HttpResponse {
     return this.response(res, result);
   }
 
+  @Get('/:id')
+  async findById(@Param('id') id: number, @Res() res: Response) {
+    const result = await this.roleService.findById(id);
+
+    return this.response(res, result);
+  }
+
   @Post()
   async create(
     @Body(new ValidationPipe()) body: RoleDto,

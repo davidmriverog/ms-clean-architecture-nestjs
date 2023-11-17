@@ -47,6 +47,8 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
           .where(`c.${entity.getIdPropertyName()} = :id`, { id })
           .getOne();
 
+        if (!resultEntity) throw new Error(`${entity.name} doesn't exists!`);
+
         const convertMapper = this._mapper.entityToBO(resultEntity);
 
         return Result.success(convertMapper);
