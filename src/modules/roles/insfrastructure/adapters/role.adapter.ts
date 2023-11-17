@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
 
-import { Role } from './role.entity';
+import { Role } from '../entities/role.entity';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleMapper } from '../mappers/role.mapper';
 import { RolePort } from '@modules/roles/application/ports/role.port';
