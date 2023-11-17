@@ -1,8 +1,8 @@
 import { DataSource, QueryRunner, Repository } from 'typeorm';
-import { Result } from '@shared/infrastructure/Result';
 import { IBaseORMPort } from './orm.port';
-import { IMapper } from '@shared/infrastructure/mapper/base.mapper';
 import { BaseEntity } from '@infra/common/base.entity';
+import { Result } from '@shared/infrastructure/Result';
+import { IMapper } from '@shared/infrastructure/mapper/base.mapper';
 import { TransactionResult } from '@shared/application/types/transaction-result.type';
 
 export function AbstractBaseORMPort<I extends BaseEntity, D>(
