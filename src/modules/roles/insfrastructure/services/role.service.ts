@@ -5,10 +5,13 @@ import { IRoleGetAllUseCase } from '@modules/roles/domain/use-cases/role-getAll.
 import { IRoleNewUseCase } from '@modules/roles/domain/use-cases/role-new.interface';
 import { IRoleEditUseCase } from '@modules/roles/domain/use-cases/role-edit.interface';
 import { IRoleRemoveUseCase } from '@modules/roles/domain/use-cases/role-remove.interface';
+import { IRoleFindByIdUseCase } from '@modules/roles/domain/use-cases/role-findById.interface';
 
 @Injectable()
 export class RoleService {
   constructor(
+    @Inject(RoleUseCaseEnum.ROLE_FIND_BY_ID)
+    private readonly roleFindByIdUseCase: IRoleFindByIdUseCase,
     @Inject(RoleUseCaseEnum.ROLE_GET_ALL)
     private readonly roleGetAllUseCase: IRoleGetAllUseCase,
     @Inject(RoleUseCaseEnum.ROLE_NEW)
@@ -21,6 +24,10 @@ export class RoleService {
 
   async getAll() {
     return await this.roleGetAllUseCase.execute();
+  }
+
+  async findById(id) {
+    return await this.roleFindByIdUseCase.execute(id);
   }
 
   async create(attrs) {

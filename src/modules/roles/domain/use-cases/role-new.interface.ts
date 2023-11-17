@@ -1,7 +1,7 @@
 import { RoleBO } from '../role.bo';
 import { RoleDto } from '../dto/role.dto';
+import { Result } from '@shared/infrastructure/Result';
 
-import { TransactionCreateUseCase } from '@shared/domain/use-cases/transaction-create.usecase';
-
-export interface IRoleNewUseCase
-  extends TransactionCreateUseCase<RoleBO, RoleDto> {}
+export interface IRoleNewUseCase {
+  execute(attrs: RoleDto): Promise<Result<RoleBO | string>>;
+}

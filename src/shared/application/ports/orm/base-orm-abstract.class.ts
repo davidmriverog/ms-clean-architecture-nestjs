@@ -40,6 +40,21 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
       }
     }
 
+    async findById(id: number): Promise<Result<D>> {
+      try {
+        const resultEntity: I = await this._repository
+          .createQueryBuilder('c')
+          .where(`c.${entity.getIdPropertyName()} = :id`, { id })
+          .getOne();
+
+        const convertMapper = this._mapper.entityToBO(resultEntity);
+
+        return Result.success(convertMapper);
+      } catch (error) {
+        return Result.fail(error.message);
+      }
+    }
+
     async create(attrs: any, queryRunner?: QueryRunner): Promise<Result<I>> {
       try {
         const convertMapper = this._mapper.dtoToEntity(attrs);
@@ -57,41 +72,49 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
       attrs: any,
       queryRunner?: QueryRunner,
     ): Promise<Result<TransactionResult>> {
-      const convertMapper = this._mapper.dtoToEntity(attrs);
+      try {
+        const convertMapper = this._mapper.dtoToEntity(attrs);
 
-      const result = await queryRunner.manager.update(
-        entity,
-        {
-          [entity.getIdPropertyName()]: id,
-        },
-        convertMapper,
-      );
+        const result = await queryRunner.manager.update(
+          entity,
+          {
+            [entity.getIdPropertyName()]: id,
+          },
+          convertMapper,
+        );
 
-      if (result.affected === 0)
-        throw new Error('No Data Affected, cause Role does not exists');
+        if (result.affected === 0)
+          throw new Error('No Data Affected, cause Role does not exists');
 
-      return Result.success({
-        affected: result.affected > 0 ? true : false,
-      });
+        return Result.success({
+          affected: result.affected > 0 ? true : false,
+        });
+      } catch (error) {
+        return Result.fail(error.message);
+      }
     }
 
     async remove(
       id: number,
       queryRunner?: QueryRunner,
     ): Promise<Result<TransactionResult>> {
-      const result = await queryRunner.manager
-        .createQueryBuilder()
-        .softDelete()
-        .from(entity)
-        .where(`${entity.getIdPropertyName()} = :id`, { id: id })
-        .execute();
+      try {
+        const result = await queryRunner.manager
+          .createQueryBuilder()
+          .softDelete()
+          .from(entity)
+          .where(`${entity.getIdPropertyName()} = :id`, { id: id })
+          .execute();
 
-      if (result.affected === 0)
-        throw new Error('No Data Affected, cause Role does not exists');
+        if (result.affected === 0)
+          throw new Error('No Data Affected, cause Role does not exists');
 
-      return Result.success({
-        affected: result.affected > 0 ? true : false,
-      });
+        return Result.success({
+          affected: result.affected > 0 ? true : false,
+        });
+      } catch (error) {
+        return Result.fail(error.message);
+      }
     }
 
     async transaction(
