@@ -1,10 +1,10 @@
-import { RoleDto } from '../dto/role.dto';
 import { Result } from '@shared/infrastructure/Result';
+import { BaseDto } from '../dto/base-dto.dto';
 import { TransactionResult } from '@shared/application/types/transaction-result.type';
 
-export interface IRoleEditUseCase {
+export interface IEditUseCase {
   execute(
     id: number,
-    attrs: RoleDto,
+    attrs: BaseDto,
   ): Promise<Result<TransactionResult | string>>;
 }

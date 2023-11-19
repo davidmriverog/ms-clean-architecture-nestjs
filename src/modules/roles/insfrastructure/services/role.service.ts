@@ -1,44 +1,36 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
 
-import { IRoleGetAllUseCase } from '@modules/roles/domain/use-cases/role-getAll.interface';
-import { IRoleNewUseCase } from '@modules/roles/domain/use-cases/role-new.interface';
-import { IRoleEditUseCase } from '@modules/roles/domain/use-cases/role-edit.interface';
-import { IRoleRemoveUseCase } from '@modules/roles/domain/use-cases/role-remove.interface';
-import { IRoleFindByIdUseCase } from '@modules/roles/domain/use-cases/role-findById.interface';
+import { RoleBO } from '@modules/roles/domain/role.bo';
+import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
+import { AbstractService } from '@shared/infrastructure/service/abstract-service.service';
+import { RoleGetAllUseCase } from '@modules/roles/application/use-case/role-getAll.uc';
+import { RoleFindByIdUseCase } from '@modules/roles/application/use-case/role-findById.uc';
+import { RoleCreateUseCase } from '@modules/roles/application/use-case/role-create.uc';
+import { RoleEditUseCase } from '@modules/roles/application/use-case/role-edit.uc';
+import { RoleRemoveUseCase } from '@modules/roles/application/use-case/role-remove.uc';
 
 @Injectable()
-export class RoleService {
+export class RoleService extends AbstractService<RoleBO> {
   constructor(
-    @Inject(RoleUseCaseEnum.ROLE_FIND_BY_ID)
-    private readonly roleFindByIdUseCase: IRoleFindByIdUseCase,
     @Inject(RoleUseCaseEnum.ROLE_GET_ALL)
-    private readonly roleGetAllUseCase: IRoleGetAllUseCase,
-    @Inject(RoleUseCaseEnum.ROLE_NEW)
-    private readonly roleNewUseCase: IRoleNewUseCase,
+    private readonly findAllRoleUseCase: RoleGetAllUseCase,
+    @Inject(RoleUseCaseEnum.ROLE_FIND_BY_ID)
+    private readonly findByIdRoleUseCase: RoleFindByIdUseCase,
+    @Inject(RoleUseCaseEnum.ROLE_CREATE)
+    private readonly createRoleUseCase: RoleCreateUseCase,
     @Inject(RoleUseCaseEnum.ROLE_EDIT)
-    private readonly roleEditUseCase: IRoleEditUseCase,
+    private readonly editRoleUseCase: RoleEditUseCase,
     @Inject(RoleUseCaseEnum.ROLE_REMOVE)
-    private readonly roleRemoveUseCase: IRoleRemoveUseCase,
-  ) {}
-
-  async getAll() {
-    return await this.roleGetAllUseCase.execute();
+    private readonly removeRoleUseCase: RoleRemoveUseCase,
+  ) {
+    super(
+      findAllRoleUseCase,
+      findByIdRoleUseCase,
+      createRoleUseCase,
+      editRoleUseCase,
+      removeRoleUseCase,
+    );
   }
 
-  async findById(id) {
-    return await this.roleFindByIdUseCase.execute(id);
-  }
-
-  async create(attrs) {
-    return await this.roleNewUseCase.execute(attrs);
-  }
-
-  async update(id, attrs) {
-    return await this.roleEditUseCase.execute(id, attrs);
-  }
-
-  async remove(id) {
-    return await this.roleRemoveUseCase.execute(id);
-  }
+  // Other Implements!
 }

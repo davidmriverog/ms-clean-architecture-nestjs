@@ -22,7 +22,7 @@ export class RoleController extends HttpResponse {
 
   @Get()
   async findAll(@Res() res: Response) {
-    const result = await this.roleService.getAll();
+    const result = await this.roleService.findAll();
 
     return this.response(res, result);
   }
@@ -45,12 +45,12 @@ export class RoleController extends HttpResponse {
   }
 
   @Put('/:id')
-  async update(
+  async edit(
     @Body(new ValidationPipe()) body: RoleDto,
     @Param('id') id: number,
     @Res() res: Response,
   ) {
-    const result = await this.roleService.update(id, body);
+    const result = await this.roleService.edit(id, body);
 
     return this.response(res, result);
   }

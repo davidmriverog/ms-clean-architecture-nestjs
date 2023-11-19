@@ -1,6 +1,6 @@
-import { Result } from '@shared/infrastructure/Result';
 import { TransactionResult } from '@shared/application/types/transaction-result.type';
+import { Result } from '@shared/infrastructure/Result';
 
-export interface IRoleRemoveUseCase {
+export interface IRemoveUseCase {
   execute(id: number): Promise<Result<TransactionResult | string>>;
 }
