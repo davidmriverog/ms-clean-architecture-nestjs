@@ -32,6 +32,9 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
           .createQueryBuilder('c')
           .getMany();
 
+        if (entities.length === 0)
+          throw new Error(`${entity.name} not records found!`);
+
         const results = entities.map(this._mapper.entityToBO);
 
         return Result.success(results);
@@ -47,7 +50,7 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
           .where(`c.${entity.getIdPropertyName()} = :id`, { id })
           .getOne();
 
-        if (!resultEntity) throw new Error(`${entity.name} doesn't exists!`);
+        if (!resultEntity) throw new Error(`${entity.name} not found!`);
 
         const convertMapper = this._mapper.entityToBO(resultEntity);
 

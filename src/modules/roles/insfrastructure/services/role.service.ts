@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { AbstractService } from '@shared/infrastructure/service/abstract-service.service';
 
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
-import { AbstractService } from '@shared/infrastructure/service/abstract-service.service';
+
 import { RoleGetAllUseCase } from '@modules/roles/application/use-case/role-getAll.uc';
 import { RoleFindByIdUseCase } from '@modules/roles/application/use-case/role-findById.uc';
 import { RoleCreateUseCase } from '@modules/roles/application/use-case/role-create.uc';
