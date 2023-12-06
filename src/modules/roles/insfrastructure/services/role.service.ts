@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AbstractService } from '@shared/infrastructure/service/abstract-service.service';
+import { AbstractService } from '@libs/infra';
 
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@infra/database';
+import { DatabaseModule } from '@libs/infra';
 
 import { RoleController } from './insfrastructure/controllers/role.controller';
 import { RoleMapper } from './insfrastructure/mappers/role.mapper';

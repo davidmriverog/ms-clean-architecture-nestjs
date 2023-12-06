@@ -1,4 +1,4 @@
-import { BaseDto } from '@shared/domain/dto/base-dto.dto';
+import { BaseDto } from '@libs/business';
 import { IsNotEmpty } from 'class-validator';
 
 export class RoleDto extends BaseDto {

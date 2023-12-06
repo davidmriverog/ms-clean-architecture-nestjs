@@ -9,10 +9,12 @@ import {
   Res,
   ValidationPipe,
 } from '@nestjs/common';
+
+import { HttpResponse } from '@libs/infra';
 import { Response } from 'express';
+
 import { RoleService } from '../services/role.service';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
-import { HttpResponse } from '@shared/infrastructure/http/http-response';
 
 @Controller('roles')
 export class RoleController extends HttpResponse {

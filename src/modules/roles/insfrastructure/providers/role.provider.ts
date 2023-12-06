@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Role } from '../entities/role.entity';
-import { RoleProviderEnum } from '@modules/roles/domain//enums/role-provider.enum';
+import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 export const ROLE_REPOSITORY_PROVIDER = [
   {
