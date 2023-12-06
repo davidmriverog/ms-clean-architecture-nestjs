@@ -1,4 +1,4 @@
-import { MODEL_IDENTITY_META_KEY } from '@infra/decorators/identity/identity.decorator';
+import { MODEL_IDENTITY_META_KEY } from '../decorators/identity.decorator';
 
 export class BaseEntity {
   static getIdPropertyName() {

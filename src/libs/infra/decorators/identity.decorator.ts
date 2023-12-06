@@ -1,6 +1,5 @@
 import 'reflect-metadata';
-
-import { BaseEntity } from '@infra/common/base.entity';
+import { BaseEntity } from '../entities/base.entity';
 
 export const MODEL_IDENTITY_META_KEY = 'MODEL_IDENTITY_META_KEY';
 

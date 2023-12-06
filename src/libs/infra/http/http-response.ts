@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import { Result } from '../Result';
+import { Result } from './http-result';
 import { STATUS_CODES } from 'http';
 
 export type HttpSuccessResult<T> = {
