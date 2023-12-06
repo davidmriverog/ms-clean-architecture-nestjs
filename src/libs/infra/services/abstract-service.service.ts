@@ -1,9 +1,9 @@
-import { BaseDto } from '@shared/domain/dto/base-dto.dto';
-import { ICreateUseCase } from '@shared/domain/use-cases/create.usecase';
-import { IEditUseCase } from '@shared/domain/use-cases/edit.usecase';
-import { IFindAllUseCase } from '@shared/domain/use-cases/findAll.usecase';
-import { IFindByIdUseCase } from '@shared/domain/use-cases/findById.usecase';
-import { IRemoveUseCase } from '@shared/domain/use-cases/remove.usecase';
+import { BaseDto } from './../../business/base-dto.dto';
+import { IRemoveUseCase } from './../../app/use-cases/remove.usecase';
+import { IEditUseCase } from './../../app/use-cases/edit.usecase';
+import { ICreateUseCase } from './../../app/use-cases/create.usecase';
+import { IFindByIdUseCase } from './../../app/use-cases/findById.usecase';
+import { IFindAllUseCase } from './../../app/use-cases/findAll.usecase';
 
 export abstract class AbstractService<I> {
   _findAllUseCase: IFindAllUseCase<I>;

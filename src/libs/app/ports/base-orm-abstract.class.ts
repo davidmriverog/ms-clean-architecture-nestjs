@@ -1,15 +1,16 @@
 import { DataSource, QueryRunner, Repository } from 'typeorm';
-import { IBaseORMPort } from './orm.port';
-import { BaseEntity } from '@infra/common/base.entity';
-import { Result } from '@shared/infrastructure/Result';
-import { IMapper } from '@shared/infrastructure/mapper/base.mapper';
-import { TransactionResult } from '@shared/application/types/transaction-result.type';
+
+import { IBaseRepositoryPort } from './repository.port';
+import { Result } from './../../infra/http/http-result';
+import { IMapper } from './../../infra/mappers/base.mapper';
+import { BaseEntity } from './../../infra/entities/base.entity';
+import { ResultTransaction } from './types/transaction.type';
 
 export function AbstractBaseORMPort<I extends BaseEntity, D>(
   entity: typeof BaseEntity,
   bo,
 ) {
-  abstract class BaseORMPort implements IBaseORMPort<I, D> {
+  abstract class BaseORMPort implements IBaseRepositoryPort<I, D> {
     _dataSource: DataSource;
     _repository: Repository<I>;
     _mapper: IMapper<I, D>;
@@ -76,7 +77,7 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
       id: number,
       attrs: any,
       queryRunner?: QueryRunner,
-    ): Promise<Result<TransactionResult>> {
+    ): Promise<Result<ResultTransaction>> {
       try {
         const convertMapper = this._mapper.dtoToEntity(attrs);
 
@@ -102,7 +103,7 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
     async remove(
       id: number,
       queryRunner?: QueryRunner,
-    ): Promise<Result<TransactionResult>> {
+    ): Promise<Result<ResultTransaction>> {
       try {
         const result = await queryRunner.manager
           .createQueryBuilder()

@@ -1,4 +1,4 @@
-import { Result } from '@shared/infrastructure/Result';
+import { Result } from './../../infra/http/http-result';
 
 export interface IFindAllUseCase<I> {
   execute(): Promise<Result<I[]>>;
