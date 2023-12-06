@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Result } from '@shared/infrastructure/Result';
-import { ICreateUseCase } from '@shared/domain/use-cases/create.usecase';
+import { Result } from '@libs/infra';
+import { ICreateUseCase } from '@libs/app';
 
 import { RoleRepository } from '../ports/role.repository';
 import { RoleBO } from '@modules/roles/domain/role.bo';

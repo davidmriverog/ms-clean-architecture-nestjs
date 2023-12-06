@@ -1,7 +1,7 @@
+import { IBaseRepositoryPort } from '@libs/app';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { Role } from '@modules/roles/insfrastructure/entities/role.entity';
-import { IBaseORMPort } from '@shared/application/ports/orm/orm.port';
 
-export interface RoleRepository extends IBaseORMPort<Role, RoleBO> {
+export interface RoleRepository extends IBaseRepositoryPort<Role, RoleBO> {
   // Other methods
 }
