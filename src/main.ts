@@ -1,13 +1,13 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import {
   BadRequestException,
   HttpStatus,
   ValidationPipe,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from '@infra/exceptions/http.exception';
-import { HttpResult } from '@shared/infrastructure/http/http-response';
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 import { STATUS_CODES } from 'http';
+import { HttpExceptionFilter, HttpResult } from '@libs/infra';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
