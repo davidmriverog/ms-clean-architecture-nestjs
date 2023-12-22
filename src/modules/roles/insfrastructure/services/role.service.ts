@@ -4,11 +4,11 @@ import { AbstractService } from '@libs/infra';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
 
-import { RoleGetAllUseCase } from '@modules/roles/application/use-case/role-getAll.uc';
-import { RoleFindByIdUseCase } from '@modules/roles/application/use-case/role-findById.uc';
-import { RoleCreateUseCase } from '@modules/roles/application/use-case/role-create.uc';
-import { RoleEditUseCase } from '@modules/roles/application/use-case/role-edit.uc';
-import { RoleRemoveUseCase } from '@modules/roles/application/use-case/role-remove.uc';
+import { RoleGetAllUseCase } from '@modules/roles/application/find/role-getAll.uc';
+import { RoleFindByIdUseCase } from '@modules/roles/application/find/role-findById.uc';
+import { RoleCreateUseCase } from '@modules/roles/application/create/role-create.uc';
+import { RoleEditUseCase } from '@modules/roles/application/edit/role-edit.uc';
+import { RoleRemoveUseCase } from '@modules/roles/application/remove/role-remove.uc';
 
 @Injectable()
 export class RoleService extends AbstractService<RoleBO> {

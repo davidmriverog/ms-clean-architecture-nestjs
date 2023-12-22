@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Result } from '@libs/infra';
 import { IRemoveUseCase, ResultTransaction } from '@libs/app';
 
-import { RoleRepository } from '../ports/role.repository';
+import { RoleRepository } from '../../domain/ports/role.repository';
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 @Injectable()

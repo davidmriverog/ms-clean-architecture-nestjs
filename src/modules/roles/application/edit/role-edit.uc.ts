@@ -4,7 +4,7 @@ import { IEditUseCase, ResultTransaction } from '@libs/app';
 
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
-import { RoleRepository } from '../ports/role.repository';
+import { RoleRepository } from '../../domain/ports/role.repository';
 
 @Injectable()
 export class RoleEditUseCase implements IEditUseCase {

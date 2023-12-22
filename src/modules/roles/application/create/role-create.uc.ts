@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Result } from '@libs/infra';
 import { ICreateUseCase } from '@libs/app';
 
-import { RoleRepository } from '../ports/role.repository';
+import { RoleRepository } from '../../domain/ports/role.repository';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 

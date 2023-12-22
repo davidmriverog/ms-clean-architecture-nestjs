@@ -6,7 +6,7 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { Role } from '../entities/role.entity';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleMapper } from '../mappers/role.mapper';
-import { RoleRepository } from '@modules/roles/application/ports/role.repository';
+import { RoleRepository } from '@modules/roles/domain/ports/role.repository';
 import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 export class RoleRepositoryAdapter
