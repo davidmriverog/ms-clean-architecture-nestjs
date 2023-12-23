@@ -4,7 +4,6 @@ import { IFindByIdUseCase } from '@libs/app';
 
 import { RoleBO } from './../../domain/role.bo';
 import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
-
 import { RoleRepository } from '../../domain/ports/role.repository';
 
 @Injectable()

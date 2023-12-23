@@ -6,15 +6,15 @@ import { IMapper } from '../../infra/mappers/base.mapper';
 import { BaseEntity } from '../../infra/entities/base.entity';
 import { ResultTransaction } from '../types/transaction.type';
 
-export function AbstractBaseORMPort<I extends BaseEntity, D>(
+export function AbstractBaseTypeORMPort<I extends BaseEntity, D>(
   entity: typeof BaseEntity,
   bo,
 ) {
-  abstract class BaseORMPort implements IBaseRepositoryPort<I, D> {
+  abstract class BaseTypeORMPort implements IBaseRepositoryPort<I, D> {
     _dataSource: DataSource;
     _repository: Repository<I>;
     _mapper: IMapper<I, D>;
-    _bo;
+    _bo: any;
 
     constructor(
       dataSource: DataSource,
@@ -150,5 +150,5 @@ export function AbstractBaseORMPort<I extends BaseEntity, D>(
     }
   }
 
-  return BaseORMPort;
+  return BaseTypeORMPort;
 }

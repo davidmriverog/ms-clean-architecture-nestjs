@@ -1,4 +1,4 @@
-import { BaseDto } from '../../business/dto/base-dto.dto';
+import { BaseDto } from '../../business/dto/requests/base-dto.dto';
 import { IRemoveUseCase } from './../../app/use-cases/remove.usecase';
 import { IEditUseCase } from './../../app/use-cases/edit.usecase';
 import { ICreateUseCase } from './../../app/use-cases/create.usecase';

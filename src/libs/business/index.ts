@@ -1,6 +1,6 @@
 export * from './types/transaction.type';
 
-export * from './dto/base-dto.dto';
+export * from './dto/requests/base-dto.dto';
 
 export * from './dto/responses/list-page.response';
 

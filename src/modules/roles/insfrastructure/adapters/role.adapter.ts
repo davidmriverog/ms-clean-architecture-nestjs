@@ -1,16 +1,16 @@
 import { Inject } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { AbstractBaseORMPort } from '@libs/business';
+import { AbstractBaseTypeORMPort } from '@libs/business';
 import { InjectDataSource } from '@nestjs/typeorm';
 
 import { Role } from '../entities/role.entity';
-import { RoleBO } from '@modules/roles/domain/role.bo';
+import { RoleBO } from './../../domain/role.bo';
 import { RoleMapper } from '../mappers/role.mapper';
-import { RoleRepository } from '@modules/roles/domain/ports/role.repository';
-import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
+import { RoleRepository } from './../../domain/ports/role.repository';
+import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
 
 export class RoleRepositoryAdapter
-  extends AbstractBaseORMPort<Role, RoleBO>(Role, RoleBO)
+  extends AbstractBaseTypeORMPort<Role, RoleBO>(Role, RoleBO)
   implements RoleRepository
 {
   constructor(
