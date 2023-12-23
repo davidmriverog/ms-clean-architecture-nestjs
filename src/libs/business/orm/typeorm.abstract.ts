@@ -1,10 +1,10 @@
 import { DataSource, QueryRunner, Repository } from 'typeorm';
 
-import { IBaseRepositoryPort } from './repository.port';
-import { Result } from './../../infra/http/http-result';
-import { IMapper } from './../../infra/mappers/base.mapper';
-import { BaseEntity } from './../../infra/entities/base.entity';
-import { ResultTransaction } from './types/transaction.type';
+import { IBaseRepositoryPort } from '../ports/repository.port';
+import { Result } from '../../infra/http/http-result';
+import { IMapper } from '../../infra/mappers/base.mapper';
+import { BaseEntity } from '../../infra/entities/base.entity';
+import { ResultTransaction } from '../types/transaction.type';
 
 export function AbstractBaseORMPort<I extends BaseEntity, D>(
   entity: typeof BaseEntity,

@@ -1,4 +1,4 @@
-import { IBaseRepositoryPort } from '@libs/app';
+import { IBaseRepositoryPort } from '@libs/business';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { Role } from '@modules/roles/insfrastructure/entities/role.entity';
 

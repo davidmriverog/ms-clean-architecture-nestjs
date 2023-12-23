@@ -2,9 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Result } from '@libs/infra';
 import { IFindByIdUseCase } from '@libs/app';
 
+import { RoleBO } from './../../domain/role.bo';
+import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
+
 import { RoleRepository } from '../../domain/ports/role.repository';
-import { RoleBO } from '@modules/roles/domain/role.bo';
-import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 @Injectable()
 export class RoleFindByIdUseCase implements IFindByIdUseCase<RoleBO> {

@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { AbstractBaseORMPort } from '@libs/app';
+import { AbstractBaseORMPort } from '@libs/business';
 import { InjectDataSource } from '@nestjs/typeorm';
 
 import { Role } from '../entities/role.entity';

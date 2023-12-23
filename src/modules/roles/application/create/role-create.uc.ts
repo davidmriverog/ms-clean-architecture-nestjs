@@ -6,7 +6,7 @@ import { RoleRepository } from '../../domain/ports/role.repository';
 import { RoleBO } from '@modules/roles/domain/role.bo';
 import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 
-import { RoleProviderEnum } from '@modules/roles/domain//enums/role-provider.enum';
+import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 @Injectable()
 export class RoleCreateUseCase implements ICreateUseCase<RoleBO> {

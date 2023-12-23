@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Result } from '@libs/infra';
-import { IRemoveUseCase, ResultTransaction } from '@libs/app';
+import { IRemoveUseCase } from '@libs/app';
+import { ResultTransaction } from '@libs/business';
 
+import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
 import { RoleRepository } from '../../domain/ports/role.repository';
-import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
 
 @Injectable()
 export class RoleRemoveUseCase implements IRemoveUseCase {

@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Result } from '@libs/infra';
-import { IEditUseCase, ResultTransaction } from '@libs/app';
+import { IEditUseCase } from '@libs/app';
+import { ResultTransaction } from '@libs/business';
 
-import { RoleDto } from '@modules/roles/domain/dto/role.dto';
-import { RoleProviderEnum } from '@modules/roles/domain/enums/role-provider.enum';
+import { RoleDto } from './../../domain/dto/role.dto';
 import { RoleRepository } from '../../domain/ports/role.repository';
+import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
 
 @Injectable()
 export class RoleEditUseCase implements IEditUseCase {
