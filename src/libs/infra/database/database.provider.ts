@@ -9,11 +9,7 @@ export const DatabaseProvider = [
       const dataSource = new DataSource({
         type: 'postgres',
         applicationName: 'Guayaba-API',
-        host: configService.get('DB_HOST'),
-        port: +configService.get('DB_PORT'),
-        username: configService.get('DB_USER'),
-        password: configService.get('DB_PASS'),
-        database: configService.get('DB_DATABASE'),
+        url: configService.get('DATABASE_URL'),
         entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
         synchronize: false,
         logging: Boolean(configService.get('DB_LOGGING')),
