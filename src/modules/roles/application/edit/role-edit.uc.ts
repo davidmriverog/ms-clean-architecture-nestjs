@@ -18,10 +18,7 @@ export class RoleEditUseCase implements IEditUseCase {
     id: number,
     attrs: RoleDto,
   ): Promise<Result<string | ResultTransaction>> {
-    const result: Result<ResultTransaction> =
-      await this.roleRepository.transaction(async (transaction) => {
-        return await this.roleRepository.update(id, attrs, transaction);
-      });
+    const result = await this.roleRepository.update(id, attrs);
 
     if (result.isFaliure) return Result.fail<string>(result.error);
 

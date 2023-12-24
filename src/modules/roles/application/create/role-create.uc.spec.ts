@@ -14,7 +14,7 @@ describe('RoleCreate Use Case', () => {
   beforeEach(async () => {
     createMocked = jest.fn();
 
-    const RoleRepositoryPort = {
+    const RoleRepositoryAdapterPort = {
       provide: RoleProviderEnum.ROLE_ADAPTER_PORT,
       useValue: {
         create: createMocked,
@@ -22,7 +22,7 @@ describe('RoleCreate Use Case', () => {
     };
 
     const moduleRef = await Test.createTestingModule({
-      providers: [RoleRepositoryPort, RoleCreateUseCase],
+      providers: [RoleRepositoryAdapterPort, RoleCreateUseCase],
     }).compile();
 
     roleCreateUseCase = moduleRef.get<RoleCreateUseCase>(RoleCreateUseCase);
