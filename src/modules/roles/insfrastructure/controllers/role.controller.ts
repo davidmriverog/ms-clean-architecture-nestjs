@@ -13,8 +13,8 @@ import {
 import { HttpResponse } from '@libs/infra';
 import { Response } from 'express';
 
+import { RoleDto } from './../../domain/dto/role.dto';
 import { RoleService } from '../services/role.service';
-import { RoleDto } from '@modules/roles/domain/dto/role.dto';
 
 @Controller('roles')
 export class RoleController extends HttpResponse {

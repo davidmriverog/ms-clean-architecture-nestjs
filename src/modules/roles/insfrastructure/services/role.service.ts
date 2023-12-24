@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@libs/infra';
 
-import { RoleBO } from '@modules/roles/domain/role.bo';
-import { RoleUseCaseEnum } from '@modules/roles/domain//enums/role-usecase.enum';
+import { RoleBO } from '../../domain/role.bo';
+import { RoleUseCaseEnum } from '../../domain//enums/role-usecase.enum';
 
-import { RoleGetAllUseCase } from '@modules/roles/application/find/role-getAll.uc';
-import { RoleFindByIdUseCase } from '@modules/roles/application/find/role-findById.uc';
-import { RoleCreateUseCase } from '@modules/roles/application/create/role-create.uc';
-import { RoleEditUseCase } from '@modules/roles/application/edit/role-edit.uc';
-import { RoleRemoveUseCase } from '@modules/roles/application/remove/role-remove.uc';
+import { RoleGetAllUseCase } from '../../application/find/role-getAll.uc';
+import { RoleFindByIdUseCase } from '../../application/find/role-findById.uc';
+import { RoleCreateUseCase } from '../../application/create/role-create.uc';
+import { RoleEditUseCase } from '../../application/edit/role-edit.uc';
+import { RoleRemoveUseCase } from '../../application/remove/role-remove.uc';
 
 @Injectable()
 export class RoleService extends AbstractService<RoleBO> {

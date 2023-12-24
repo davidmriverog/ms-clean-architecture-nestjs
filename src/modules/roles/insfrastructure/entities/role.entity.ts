@@ -1,4 +1,3 @@
-import { BaseEntity, ModelIdentity } from '@libs/infra';
 import {
   Column,
   CreateDateColumn,
@@ -7,6 +6,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { BaseEntity, ModelIdentity } from '@libs/infra';
 
 @Entity({
   name: 'roles',
