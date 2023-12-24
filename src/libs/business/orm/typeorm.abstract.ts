@@ -1,5 +1,6 @@
 import { DataSource, QueryRunner, Repository } from 'typeorm';
 
+import { BaseDto } from '../dto/requests/base-dto.dto';
 import { IBaseRepositoryPort } from '../ports/repository.port';
 import { Result } from '../../infra/http/http-result';
 import { IMapper } from '../../infra/mappers/base.mapper';
@@ -61,23 +62,46 @@ export function AbstractBaseTypeORMPort<I extends BaseEntity, D>(
       }
     }
 
-    async create(attrs: any, queryRunner?: QueryRunner): Promise<Result<I>> {
+    async create(
+      attrs: BaseDto,
+      transaction?: QueryRunner,
+    ): Promise<Result<D>> {
+      const queryRunner = transaction ?? this._dataSource.createQueryRunner();
+
+      if (!transaction) {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+      }
+
       try {
         const convertMapper = this._mapper.dtoToEntity(attrs);
 
         const result = await queryRunner.manager.save(convertMapper);
 
-        return Result.success(result);
+        if (!transaction) await queryRunner.commitTransaction();
+
+        return Result.success(this._mapper.entityToBO(result));
       } catch (error) {
+        if (!transaction) await queryRunner.rollbackTransaction();
+
         return Result.fail(error.message);
+      } finally {
+        if (!transaction) await queryRunner.release();
       }
     }
 
     async update(
       id: number,
-      attrs: any,
-      queryRunner?: QueryRunner,
+      attrs: BaseDto,
+      transaction?: QueryRunner,
     ): Promise<Result<ResultTransaction>> {
+      const queryRunner = transaction ?? this._dataSource.createQueryRunner();
+
+      if (!transaction) {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+      }
+
       try {
         const convertMapper = this._mapper.dtoToEntity(attrs);
 
@@ -92,11 +116,17 @@ export function AbstractBaseTypeORMPort<I extends BaseEntity, D>(
         if (result.affected === 0)
           throw new Error('No Data Affected, cause Role does not exists');
 
+        if (!transaction) await queryRunner.commitTransaction();
+
         return Result.success({
           affected: result.affected > 0 ? true : false,
         });
       } catch (error) {
+        if (!transaction) await queryRunner.rollbackTransaction();
+
         return Result.fail(error.message);
+      } finally {
+        if (!transaction) await queryRunner.release();
       }
     }
 

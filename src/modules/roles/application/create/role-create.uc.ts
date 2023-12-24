@@ -15,11 +15,7 @@ export class RoleCreateUseCase implements ICreateUseCase<RoleBO> {
   ) {}
 
   async execute(attrs: RoleDto): Promise<Result<RoleBO | string>> {
-    const result = await this.roleRepository.transaction(
-      async (transaction) => {
-        return await this.roleRepository.create(attrs, transaction);
-      },
-    );
+    const result = await this.roleRepository.create(attrs);
 
     if (result.isFaliure) return Result.fail<string>(result.error);
 
