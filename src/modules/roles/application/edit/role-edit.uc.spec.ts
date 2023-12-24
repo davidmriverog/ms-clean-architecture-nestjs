@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { Result } from '@libs/infra';
-import { RoleProviderEnum } from './../../domain/enums/role-provider.enum';
+import { RoleProviderEnum } from '../../domain/enums/role-provider.enum';
 
-import { RoleDto } from './../../domain/dto/role.dto';
+import { RoleDto } from '../../domain/dto/role.dto';
 import { RoleEditUseCase } from './role-edit.uc';
 
 describe('RoleEdit Use Case', () => {
@@ -49,7 +49,7 @@ describe('RoleEdit Use Case', () => {
     });
   });
 
-  it('Should be fails created', async () => {
+  it('Should be fails edit', async () => {
     editUseCaseMock.mockResolvedValue(Result.fail('Error'));
 
     const results = await roleEditUseCase.execute(1, <RoleDto>{
