@@ -43,8 +43,6 @@ export class RoleController extends HttpResponse {
   ) {
     const result = await this.roleService.create(body);
 
-    // hola mundo
-
     return this.response(res, result);
   }
 
