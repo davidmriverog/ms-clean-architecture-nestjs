@@ -28,3 +28,6 @@ export * from './services/abstract-service.service';
 export * from './http/http-response';
 
 export * from './http/http-result';
+
+export * from './ports/output/entity.repository';
+export * from './adapters/postgres-repository.adapter';
