@@ -8,10 +8,10 @@ export const DatabaseProvider = [
     useFactory: async (configService: ConfigService) => {
       const dataSource = new DataSource({
         type: 'postgres',
-        applicationName: 'Guayaba-API',
+        applicationName: 'Sunset-API',
         url: configService.get('DATABASE_URL'),
         entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
-        synchronize: false,
+        synchronize: true,
         logging: Boolean(configService.get('DB_LOGGING')),
         namingStrategy: new SnakeNamingStrategy(),
         useUTC: true,
