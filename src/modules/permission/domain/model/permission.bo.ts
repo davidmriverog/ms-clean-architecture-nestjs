@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 export class PermissionBO {
   @Expose()
@@ -9,4 +9,13 @@ export class PermissionBO {
 
   @Expose()
   description: string;
+
+  @Expose()
+  createdAt: Date;
+
+  @Expose()
+  updatedAt: string;
+
+  @Exclude()
+  deletedAt: string;
 }

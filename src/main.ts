@@ -1,13 +1,8 @@
-import {
-  BadRequestException,
-  HttpStatus,
-  ValidationPipe,
-} from '@nestjs/common';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { STATUS_CODES } from 'http';
-import { HttpExceptionFilter, HttpResult } from '@libs/infra';
+import { HttpExceptionFilter } from '@libs/infra';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,10 +16,10 @@ async function bootstrap() {
           (error) => error.constraints[Object.keys(error.constraints)[0]],
         );
 
-        return new BadRequestException(<HttpResult<any[]>>{
-          status: STATUS_CODES[HttpStatus.BAD_REQUEST],
-          message: 'Validation Errors',
-          error: errMgs,
+        return new BadRequestException({
+          code: 'validation.field_errors',
+          message: 'Hemos detectado campos con faltantes o con errores',
+          errors: errMgs,
         });
       },
       stopAtFirstError: true,

@@ -1,7 +1,0 @@
-export enum RoleUseCaseEnum {
-  ROLE_GET_ALL = 'ROLE_GET_ALL',
-  ROLE_FIND_BY_ID = 'ROLE_FIND_BY_ID',
-  ROLE_CREATE = 'ROLE_CREATE',
-  ROLE_EDIT = 'ROLE_EDIT',
-  ROLE_REMOVE = 'ROLE_REMOVE',
-}
