@@ -26,3 +26,5 @@ export * from './mappers/base.mapper';
 export * from './http/http-response';
 
 export * from './http/http-result';
+
+export * from './adapters/abstract-adapter.adapter';
