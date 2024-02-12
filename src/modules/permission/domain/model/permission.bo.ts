@@ -13,12 +13,10 @@ export class PermissionBO {
 
   @Expose()
   @IsNotEmpty()
-  @IsString()
   code: string;
 
   @Expose()
   @IsOptional()
-  @IsString()
   description: string;
 
   @Expose()

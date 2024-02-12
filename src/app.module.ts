@@ -1,6 +1,7 @@
+import { APP_PIPE } from '@nestjs/core';
 import { DatabaseModule } from '@libs/infra';
 import { MainModule } from '@modules/modules.module';
-import { Module } from '@nestjs/common';
+import { BadRequestException, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -10,6 +11,26 @@ import { ConfigModule } from '@nestjs/config';
     }),
     MainModule,
     DatabaseModule,
+  ],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        exceptionFactory(errors) {
+          const errMgs = errors.map(
+            (error) => error.constraints[Object.keys(error.constraints)[0]],
+          );
+
+          return new BadRequestException({
+            code: 'validation.field_errors',
+            message: 'Hemos detectado campos con faltantes o con errores',
+            errors: errMgs,
+          });
+        },
+        stopAtFirstError: true,
+        whitelist: true,
+      }),
+    },
   ],
 })
 export class AppModule {}

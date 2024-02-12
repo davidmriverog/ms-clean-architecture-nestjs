@@ -43,16 +43,94 @@ export function AbstractImplAdapter<I extends BaseEntity, D>(
       return this._mapper.entityToBO(resultEntity);
     }
 
-    create(entityDto: any, tr?: QueryRunner): Promise<D> {
-      throw new Error('Method not implemented.');
+    async create(entityDto: D, tr?: QueryRunner): Promise<D> {
+      const queryRunner = tr ?? this._dataSource.createQueryRunner();
+
+      if (!tr) {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+      }
+
+      try {
+        const convertMapper = this._mapper.dtoToEntity(entityDto);
+
+        const result = await queryRunner.manager.save(convertMapper);
+
+        if (!tr) await queryRunner.commitTransaction();
+
+        return this._mapper.entityToBO(result);
+      } catch (error) {
+        if (!tr) await queryRunner.rollbackTransaction();
+
+        throw error;
+      } finally {
+        if (!tr) await queryRunner.release();
+      }
     }
 
-    update(id: number, entityDto: any, tr?: QueryRunner): Promise<D> {
-      throw new Error('Method not implemented.');
+    async update(id: number, entityDto: D, tr?: QueryRunner): Promise<D> {
+      const queryRunner = tr ?? this._dataSource.createQueryRunner();
+
+      if (!tr) {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+      }
+
+      try {
+        const convertMapper = this._mapper.dtoToEntity(entityDto);
+
+        const result = await queryRunner.manager.update(
+          entity,
+          {
+            [entity.getIdPropertyName()]: id,
+          },
+          convertMapper,
+        );
+
+        if (result.affected === 0)
+          throw new Error('No Data Affected, cause Role does not exists');
+
+        if (!tr) await queryRunner.commitTransaction();
+
+        return this._mapper.entityToBO(convertMapper);
+      } catch (error) {
+        if (!tr) await queryRunner.rollbackTransaction();
+
+        throw error;
+      } finally {
+        if (!tr) await queryRunner.release();
+      }
     }
 
-    remove(id: number, tr?: QueryRunner): Promise<boolean> {
-      throw new Error('Method not implemented.');
+    async remove(id: number, tr?: QueryRunner): Promise<boolean> {
+      const queryRunner = tr ?? this._dataSource.createQueryRunner();
+
+      if (!tr) {
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+      }
+
+      try {
+        const result = await queryRunner.manager
+          .createQueryBuilder()
+          .softDelete()
+          .from(entity)
+          .where(`${entity.getIdPropertyName()} = :id`, { id: id })
+          .execute();
+
+        if (result.affected === 0)
+          throw new Error('No Data Affected, cause Role does not exists');
+
+        if (!tr) await queryRunner.commitTransaction();
+
+        return true;
+      } catch (error) {
+        if (!tr) await queryRunner.rollbackTransaction();
+
+        throw error;
+      } finally {
+        if (!tr) await queryRunner.release();
+      }
     }
   }
 
