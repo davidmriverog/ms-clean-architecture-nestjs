@@ -1,20 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { Result } from '@libs/infra';
+import { Inject, Injectable } from '@nestjs/common';
 
 import { PermissionBO } from '../domain/model/permission.bo';
 import { PermissionService } from '../domain/ports/inbound/permission.service';
+import { PERMISSION_SERVICE } from '../domain/consts/permission.const';
 
 @Injectable()
 export class GetAllPermissionUseCase {
-  constructor(private readonly permissionService: PermissionService) {}
+  constructor(
+    @Inject(PERMISSION_SERVICE)
+    private readonly permissionService: PermissionService,
+  ) {}
 
-  async exec(): Promise<Result<PermissionBO[]>> {
-    try {
-      const result = await this.permissionService.getAll();
-
-      return Result.success(result);
-    } catch (error) {
-      return Result.fail(error.message);
-    }
+  async exec(): Promise<PermissionBO[]> {
+    return await this.permissionService.getAll();
   }
 }

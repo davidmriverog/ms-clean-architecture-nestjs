@@ -10,7 +10,7 @@ import { PermissionError } from '../../../domain/errors/permission.error';
 import { permissionMapping } from './mapping-errors.mapping';
 
 @Catch(PermissionError)
-export class PermissionFilter implements ExceptionFilter {
+export class PermissionExceptionFilter implements ExceptionFilter {
   catch(exception: PermissionError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -22,6 +22,7 @@ export class PermissionFilter implements ExceptionFilter {
 
     response.status(HttpStatus.NOT_FOUND).json({
       status: HttpStatus.NOT_FOUND,
+      code: exception.message,
       message: permissionMapping.get(exception.message),
     });
   }
