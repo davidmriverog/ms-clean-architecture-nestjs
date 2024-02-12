@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@libs/infra';
+import { DatabaseModule } from 'sunset-nestjs';
 
 import { PermissionController } from './infrastructure/http/controller/permission.controller';
 

@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { BaseEntity, ModelIdentity } from '@libs/infra';
+import { BaseEntity, ModelIdentity } from 'sunset-nestjs';
 
 @Entity({
   name: 'permissions',

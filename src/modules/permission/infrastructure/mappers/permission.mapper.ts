@@ -1,4 +1,4 @@
-import { IMapper } from '@libs/infra';
+import { IMapper } from 'sunset-nestjs';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
