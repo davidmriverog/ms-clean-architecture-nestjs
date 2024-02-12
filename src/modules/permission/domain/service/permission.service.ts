@@ -1,17 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { AbstractDomainService } from '@libs/domain';
+
 import { PermissionBO } from '../model/permission.bo';
-import { PermissionService } from '../ports/inbound/permission.service';
-import { PermissionRepository } from '../ports/outbound/permission.repository';
 import { PERMISSION_REPOSITORY } from '../consts/permission.const';
+import { PermissionRepository } from '../ports/outbound/permission.repository';
 
 @Injectable()
-export class PermissionDomainService implements PermissionService {
+export class PermissionDomainService extends AbstractDomainService<PermissionBO> {
   constructor(
     @Inject(PERMISSION_REPOSITORY)
     private readonly permissionRepository: PermissionRepository,
-  ) {}
-
-  async getAll(): Promise<PermissionBO[]> {
-    return await this.permissionRepository.getAll();
+  ) {
+    super(permissionRepository);
   }
+
+  // override
 }

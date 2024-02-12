@@ -21,8 +21,6 @@ export * from './mappers/base.mapper';
 
 // services
 
-export * from './services/abstract-service.service';
-
 // http
 
 export * from './http/http-response';

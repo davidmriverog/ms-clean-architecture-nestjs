@@ -2,6 +2,9 @@ import { Exclude, Expose } from 'class-transformer';
 
 export class PermissionBO {
   @Expose()
+  id: number;
+
+  @Expose()
   name: string;
 
   @Expose()

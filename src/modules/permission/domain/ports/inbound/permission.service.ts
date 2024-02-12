@@ -1,7 +1,6 @@
+import { IPortInbound } from '@libs/domain';
 import { PermissionBO } from '../../model/permission.bo';
 
-export interface PermissionService {
-  getAll(): Promise<PermissionBO[]>;
+export interface PermissionService extends IPortInbound<PermissionBO> {
+  //
 }
-
-export const PermissionService = Symbol('PermissionService');
