@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { PermissionBO } from '../domain/model/permission.bo';
-import { PermissionService } from '../domain/ports/inbound/permission.service';
-import { PERMISSION_SERVICE } from '../domain/consts/permission.const';
+import { PermissionBO } from '../../domain/model/permission.bo';
+import { PermissionService } from '../../domain/ports/in/permission.service';
+import { PERMISSION_SERVICE } from '../../domain/consts/permission.const';
 
 @Injectable()
 export class GetAllPermissionUseCase {

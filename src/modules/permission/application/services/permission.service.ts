@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AbstractDomainService } from 'sunset-nestjs';
 
-import { PermissionBO } from '../model/permission.bo';
-import { PERMISSION_REPOSITORY } from '../consts/permission.const';
-import { PermissionRepository } from '../ports/outbound/permission.repository';
+import { PermissionBO } from '../../domain/model/permission.bo';
+import { PERMISSION_REPOSITORY } from '../../domain/consts/permission.const';
+import { PermissionRepository } from '../../domain/ports/out/permission.repository';
 
 @Injectable()
 export class PermissionDomainService extends AbstractDomainService<PermissionBO> {

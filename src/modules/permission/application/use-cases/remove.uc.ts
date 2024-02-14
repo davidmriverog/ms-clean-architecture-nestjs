@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { PermissionService } from '../domain/ports/inbound/permission.service';
-import { PERMISSION_SERVICE } from '../domain/consts/permission.const';
+import { PermissionService } from '../../domain/ports/in/permission.service';
+import { PERMISSION_SERVICE } from '../../domain/consts/permission.const';
 
 @Injectable()
 export class RemovePermissionUseCase {
