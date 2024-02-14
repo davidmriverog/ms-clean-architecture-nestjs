@@ -2,16 +2,16 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AbstractDomainService } from 'sunset-nestjs';
 
 import { PermissionBO } from '../../domain/model/permission.bo';
-import { PERMISSION_REPOSITORY } from '../../domain/consts/permission.const';
-import { PermissionRepository } from '../../domain/ports/out/permission.repository';
+import { PERMISSION_PORT } from '../../domain/consts/permission.const';
+import { PermissionPortRepository } from '../../domain/ports/out/permission.port';
 
 @Injectable()
 export class PermissionDomainService extends AbstractDomainService<PermissionBO> {
   constructor(
-    @Inject(PERMISSION_REPOSITORY)
-    private readonly permissionRepository: PermissionRepository,
+    @Inject(PERMISSION_PORT)
+    private readonly permissionPort: PermissionPortRepository,
   ) {
-    super(permissionRepository);
+    super(permissionPort);
   }
 
   // override

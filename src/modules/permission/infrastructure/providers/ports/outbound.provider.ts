@@ -1,11 +1,11 @@
 import { Provider } from '@nestjs/common';
 
-import { PermissionAdapter } from '../../adapters/permission.adapter';
-import { PERMISSION_REPOSITORY } from '../../../domain/consts/permission.const';
+import { PERMISSION_PORT } from '../../../domain/consts/permission.const';
+import { PermissionPortAdapter } from '../../adapters/permission.adapter';
 
 export const PERMISSION_PORT_PROVIDERS = [
   {
-    provide: PERMISSION_REPOSITORY,
-    useClass: PermissionAdapter,
+    provide: PERMISSION_PORT,
+    useClass: PermissionPortAdapter,
   },
 ] as Provider[];

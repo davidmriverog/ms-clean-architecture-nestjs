@@ -7,15 +7,15 @@ import { Permission } from '../persistence/permission.entity';
 import { PermissionBO } from '../../../permission/domain/model/permission.bo';
 import { PERMISSION_ENTITY } from '../../domain/consts/permission.const';
 import { PermissionMapper } from '../mappers/permission.mapper';
-import { PermissionRepository } from '../../domain/ports/out/permission.repository';
+import { PermissionPortRepository } from '../../domain/ports/out/permission.port';
 
 @Injectable()
-export class PermissionAdapter
+export class PermissionPortAdapter
   extends AbstractImplAdapter<Permission, PermissionBO>(
     Permission,
     PermissionBO,
   )
-  implements PermissionRepository
+  implements PermissionPortRepository
 {
   constructor(
     @InjectDataSource()
