@@ -1,3 +1,4 @@
+import { Result } from '@libs/infra';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { PermissionBO } from '../../domain/model/permission.bo';
@@ -11,7 +12,15 @@ export class GetAllPermissionUseCase {
     private readonly permissionService: PermissionService,
   ) {}
 
-  async exec(): Promise<PermissionBO[]> {
-    return await this.permissionService.getAll();
+  async exec(): Promise<Result<PermissionBO[]>> {
+    try {
+      const result = await this.permissionService.getAll();
+
+      if (result.length === 0) throw new Error('Record not found');
+
+      return Result.success(result);
+    } catch (error) {
+      return Result.fail(error.message);
+    }
   }
 }

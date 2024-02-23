@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AbstractDomainService } from 'sunset-nestjs';
+import { AbstractDomainService } from '@libs/domain';
 
 import { PermissionBO } from '../../domain/model/permission.bo';
 import { PERMISSION_PORT } from '../../domain/consts/permission.const';
