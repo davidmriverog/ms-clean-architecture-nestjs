@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'sunset-nestjs';
+import { DatabaseModule } from '@libs/infra';
+import { ConfigModule } from '@nestjs/config';
 
 import { PermissionController } from './infrastructure/http/controller/permission.controller';
 
@@ -11,7 +12,7 @@ import { USE_CASES_PROVIDERS } from './infrastructure/providers/use-cases/use-ca
 import { PERMISSION_MAPPER_PROVIDERS } from './infrastructure/providers/mappers/mapper.provider';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, ConfigModule],
   controllers: [PermissionController],
   providers: [
     PermissionExceptionFilter,

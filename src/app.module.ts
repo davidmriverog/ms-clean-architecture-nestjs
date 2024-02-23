@@ -1,8 +1,8 @@
 import { APP_PIPE } from '@nestjs/core';
-import { DatabaseModule } from 'sunset-nestjs';
 import { MainModule } from '@modules/modules.module';
 import { BadRequestException, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from '@libs/infra';
 
 @Module({
   imports: [

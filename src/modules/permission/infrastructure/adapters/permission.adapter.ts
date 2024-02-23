@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { AbstractImplAdapter } from 'sunset-nestjs';
+import { AbstractImplAdapter } from '@libs/infra';
 
 import { Permission } from '../persistence/permission.entity';
 import { PermissionBO } from '../../../permission/domain/model/permission.bo';
@@ -26,6 +26,4 @@ export class PermissionPortAdapter
   ) {
     super(dataSource, engineRepsitory, permissionMapper);
   }
-
-  // additionals
 }

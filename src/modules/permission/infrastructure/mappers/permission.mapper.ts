@@ -1,5 +1,5 @@
-import { IMapper } from 'sunset-nestjs';
 import { Injectable } from '@nestjs/common';
+import { IMapper } from '@libs/infra';
 import { plainToInstance } from 'class-transformer';
 
 import { Permission } from '../persistence/permission.entity';
