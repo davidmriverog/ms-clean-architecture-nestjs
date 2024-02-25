@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PermissionBO } from '../../../domain/model/permission.bo';
 import { PERMISSION_SERVICE } from '../../../domain/consts/permission.const';
-import { GetAllPermissionUseCase } from '../../../application/use-cases/getAll.uc';
+import { GetAllPermissionUseCase } from '../../../application/use-cases/getAll-permission.uc';
 
 describe('GetAllPermissionUseCase', () => {
   let getAllMock: jest.Mock<any>;
