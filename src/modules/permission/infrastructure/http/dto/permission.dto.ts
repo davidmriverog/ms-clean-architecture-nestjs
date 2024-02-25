@@ -1,7 +1,10 @@
-import { IntersectionType } from '@nestjs/mapped-types';
+import { IntersectionType, OmitType } from '@nestjs/mapped-types';
 import { PermissionBO } from '../../../domain/model/permission.bo';
 
-export class CreatePermissionDto extends IntersectionType(PermissionBO) {
+export class CreatePermissionDto extends OmitType(
+  IntersectionType(PermissionBO),
+  ['id', 'createdAt', 'updatedAt', 'deletedAt'] as const,
+) {
   //
 }
 

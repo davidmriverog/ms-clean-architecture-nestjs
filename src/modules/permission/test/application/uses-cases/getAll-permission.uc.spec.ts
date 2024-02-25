@@ -53,15 +53,6 @@ describe('GetAllPermissionUseCase', () => {
     expect(result.value).toEqual(roles);
   });
 
-  it('should be errors get all permissions with message not_record_found', async () => {
-    getAllMock.mockImplementation(() => []);
-
-    const result = await getAllPermissionUseCase.exec();
-
-    expect(result.isFaliure).toBeTruthy();
-    expect(result.error).toEqual('Record not found');
-  });
-
   it('should be errors get all permissions cause by portErrors', async () => {
     getAllMock.mockRejectedValueOnce(new Error('error'));
 

@@ -16,8 +16,6 @@ export class GetAllPermissionUseCase {
     try {
       const result = await this.permissionService.getAll();
 
-      if (result.length === 0) throw new Error('Record not found');
-
       return Result.success(result);
     } catch (error) {
       return Result.fail(error.message);
