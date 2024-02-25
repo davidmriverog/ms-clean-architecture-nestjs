@@ -21,5 +21,7 @@ jobs:
           node-version: 18.18.2
       - name: Install Dependencies
         run: npm i
-      - name: Run tests
-        run: npm test:cov
+      - name: Run Tests
+        run: npm test
+      - name: Run Coverage Tests
+        run: npm test
