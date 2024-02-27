@@ -3,22 +3,8 @@ import { Response } from 'express';
 import { Result } from './http-result';
 import { STATUS_CODES } from 'http';
 
-export type HttpSuccessResult<T> = {
-  status: string;
-  message: string;
-  data: T;
-};
-
-export type HttpFailedResult<T> = {
-  status: string;
-  message: string;
-  error: T;
-};
-
-export type HttpResult<T> = HttpSuccessResult<T> | HttpFailedResult<T>;
-
 export class HttpResponse {
-  private jsonResult<T>(res: Response, code: number, data: HttpResult<T>) {
+  private jsonResult(res: Response, code: number, data: any) {
     return res.status(code).json(data);
   }
 
@@ -29,11 +15,7 @@ export class HttpResponse {
   }
 
   ok<T>(res: Response, data: Result<T>) {
-    return this.jsonResult(res, HttpStatus.OK, {
-      status: STATUS_CODES[HttpStatus.OK],
-      message: 'Operation Successful',
-      data: data.value,
-    });
+    return this.jsonResult(res, HttpStatus.OK, data.value);
   }
 
   fail<T>(res: Response, data: Result<T>) {
